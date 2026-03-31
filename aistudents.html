@@ -30,7 +30,7 @@ canvas { margin-top: 20px; }
   // --- Supabase ---
   const supabaseUrl = 'https://zpvhxuwwgrtqbgziylbl.supabase.co';
   const supabaseKey = 'sb_publishable_u0kVgF9XCLTk5tD9M_xj9w_9lKguAgf';
-  const sb = supabaseJs.createClient(supabaseUrl, supabaseKey);
+  const sb = supabase.createClient(supabaseUrl, supabaseKey);
 
   const classSelect = document.getElementById('classSelect');
   const analyzeBtn = document.getElementById('analyzeBtn');
