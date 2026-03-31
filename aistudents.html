@@ -39,16 +39,39 @@ canvas { margin-top: 20px; }
 
   // Load danh sách lớp học
   async function loadClasses() {
-    const { data, error } = await supabase.from('classes').select('class_id,name').order('name');
-    if(error) { console.error(error); return; }
+  try {
+    const { data, error } = await supabase
+      .from('classes')
+      .select('class_id,name')
+      .order('name');
+
+    if(error) {
+      console.error('Lỗi Supabase khi lấy lớp:', error);
+      reportDiv.innerHTML = 'Lỗi khi load danh sách lớp!';
+      return;
+    }
+
+    if(!data || data.length === 0) {
+      console.warn('Không có lớp nào trong database hoặc không có quyền truy cập.');
+      reportDiv.innerHTML = 'Chưa có lớp học hoặc không có quyền truy cập.';
+      return;
+    }
+
     data.forEach(cls => {
       const option = document.createElement('option');
       option.value = cls.class_id;
       option.textContent = cls.name;
       classSelect.appendChild(option);
     });
+
+    console.log('Danh sách lớp load thành công:', data);
+  } catch (err) {
+    console.error('Lỗi khi loadClasses:', err);
+    reportDiv.innerHTML = 'Lỗi khi load danh sách lớp!';
   }
-  loadClasses();
+}
+
+loadClasses();
 
   // --- GPT API frontend ---
   async function analyzeSummariesWithGPT(summaryText) {
