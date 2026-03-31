@@ -30,7 +30,7 @@ canvas { margin-top: 20px; }
   // --- Supabase ---
   const supabaseUrl = 'https://zpvhxuwwgrtqbgziylbl.supabase.co';
   const supabaseKey = 'sb_publishable_u0kVgF9XCLTk5tD9M_xj9w_9lKguAgf';
-  const sb = supabase.createClient(supabaseUrl, supabaseKey);
+  const sb = supabaseJs.createClient(supabaseUrl, supabaseKey);
 
   const classSelect = document.getElementById('classSelect');
   const analyzeBtn = document.getElementById('analyzeBtn');
@@ -75,7 +75,7 @@ loadClasses();
 
   // --- GPT API frontend ---
   async function analyzeSummariesWithGPT(summaryText) {
-    const OPENAI_API_KEY = 'YOUR_OPENAI_API_KEY'; // ⚠️ Chỉ dùng thử nghiệm, không để production
+    const OPENAI_API_KEY = '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'; // ⚠️ Chỉ dùng thử nghiệm, không để production
 
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
