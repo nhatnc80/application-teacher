@@ -105,7 +105,7 @@ loadClasses();
     reportDiv.innerHTML = 'Đang phân tích...';
 
     // Lấy sinh viên
-    const { data: students, error: studentErr } = await supabase
+    const { data: students, error: studentErr } = await sb
       .from('students')
       .select('student_id,name')
       .eq('class_id', classId);
