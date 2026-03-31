@@ -30,7 +30,7 @@ canvas { margin-top: 20px; }
   // --- Supabase ---
   const supabaseUrl = 'https://zpvhxuwwgrtqbgziylbl.supabase.co';
   const supabaseKey = 'sb_publishable_u0kVgF9XCLTk5tD9M_xj9w_9lKguAgf';
-  const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+  const sb = supabase.createClient(supabaseUrl, supabaseKey);
 
   const classSelect = document.getElementById('classSelect');
   const analyzeBtn = document.getElementById('analyzeBtn');
@@ -40,7 +40,7 @@ canvas { margin-top: 20px; }
   // Load danh sách lớp học
   async function loadClasses() {
   try {
-    const { data, error } = await supabase
+    const { data, error } = await sb
       .from('classes')
       .select('class_id,name')
       .order('name');
@@ -114,7 +114,7 @@ loadClasses();
     const studentIds = students.map(s => s.student_id);
 
     // Lấy submissions
-    const { data: subs, error: subErr } = await supabase
+    const { data: subs, error: subErr } = await sb
       .from('submissions')
       .select('submission_id, student_id, lesson_id, score, summary, submitted_at')
       .in('student_id', studentIds);
