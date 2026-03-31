@@ -130,17 +130,18 @@ loadClasses();
     const maxScore = scores.length ? Math.max(...scores) : 0;
 
     // Biểu đồ
-    const scoreCounts = {};
-    scores.forEach(s => { scoreCounts[s] = (scoreCounts[s]||0)+1; });
-   const chartLabels = Object.keys(scoreCounts).sort((a,b)=>a-b);
+    // Biểu đồ
+const scoreCounts = {};
+scores.forEach(s => { scoreCounts[s] = (scoreCounts[s]||0)+1; });
+const chartLabels = Object.keys(scoreCounts).sort((a,b)=>a-b);
 const chartData = chartLabels.map(l => scoreCounts[l]);
 
-// destroy chart cũ nếu tồn tại
-if(window.scoreChart && typeof window.scoreChart.destroy === 'function') {
-  window.scoreChart.destroy();
+// Destroy chart cũ nếu tồn tại
+if (window.scoreChart && typeof window.scoreChart.destroy === 'function') {
+    window.scoreChart.destroy();
 }
 
-// tạo chart mới
+// Tạo chart mới
 window.scoreChart = new Chart(scoreChartEl, {
   type: 'bar',
   data: {
